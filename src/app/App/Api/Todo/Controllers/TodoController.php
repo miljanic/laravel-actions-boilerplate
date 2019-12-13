@@ -2,8 +2,13 @@
 
 namespace App\Api\Todo\Controllers;
 
+use App\Api\Todo\Requests\CreateTodoRequest;
 use Domain\Todo\Actions\CreateTodoAction;
 use App\Http\Controllers\Controller;
+use Domain\Todo\DataTransferObjects\TodoData;
+use Domain\Todo\Exceptions\TodoTitleExists;
+use Domain\Todo\Models\Todo;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class TodoController extends Controller
@@ -28,21 +33,21 @@ class TodoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param CreateTodoRequest $request
+     * @return JsonResponse
+     * @throws TodoTitleExists
      */
-    public function store(Request $request)
+    public function store(CreateTodoRequest $request)
     {
-        $todo = $this->createTodoAction->execute($request->all());
+        $todoData = TodoData::fromRequest($request);
+        $todo = $this->createTodoAction->execute($todoData);
 
         return response()->json($todo);
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Todo  $todo
-     * @return \Illuminate\Http\Response
+     * @param Todo $todo
+     * @return JsonResponse
      */
     public function show(Todo $todo)
     {
@@ -52,9 +57,9 @@ class TodoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Todo  $todo
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Todo $todo
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Todo $todo)
     {
@@ -64,7 +69,7 @@ class TodoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Todo  $todo
+     * @param Todo $todo
      * @return \Illuminate\Http\Response
      */
     public function destroy(Todo $todo)
