@@ -2,6 +2,7 @@
 
 namespace Domain\Todo\Models;
 
+use Domain\Todo\Collections\TodoCollection;
 use Domain\Todo\QueryBuilders\TodoQueryBuilder;
 use Illuminate\Database\Eloquent\Model;
 
