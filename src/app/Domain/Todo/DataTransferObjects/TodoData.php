@@ -15,11 +15,16 @@ class TodoData extends DataTransferObject
      */
     public string $title;
 
+    /**
+     * @var int
+     */
+    public int $user_id;
+
     public static function fromRequest(Request $request): self
     {
         return new self([
             'title' => $request->get('title'),
-//            'user_id' => $request->user()->id
+            'user_id' => $request->user()->id
         ]);
     }
 }
