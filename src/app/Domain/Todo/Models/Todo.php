@@ -23,7 +23,7 @@ class Todo extends Model
         return new TodoQueryBuilder($query);
     }
 
-    public function newCollection(array $models = [])
+    public function newCollection(array $models = []): TodoCollection
     {
         return new TodoCollection($models);
     }
