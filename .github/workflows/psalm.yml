@@ -18,4 +18,4 @@ jobs:
       - name: Run psalm
         working-directory: ./src
         run: |
-          sh -c "./vendor/bin/psalm  --output-format=github $*"
+          sh -c "./vendor/bin/psalm  --output-format=github $*  --threads=2 --shepherd"
