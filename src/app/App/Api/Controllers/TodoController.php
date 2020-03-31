@@ -12,10 +12,9 @@ use Domain\Todo\DataTransferObjects\CreateTodoDTO;
 use Domain\Todo\DataTransferObjects\UpdateTodoDTO;
 use Domain\Todo\Exceptions\TodoTitleExists;
 use Domain\Todo\Models\Todo;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class TodoController extends Controller
 {
@@ -43,18 +42,18 @@ class TodoController extends Controller
      *
      * @param Request $request
      * @param TodosQuery $todosQuery
-     * @return Builder[]|Collection|\Illuminate\Support\Collection
+     * @return AnonymousResourceCollection
      */
     public function index(Request $request, TodosQuery $todosQuery)
     {
-        return $todosQuery->get();
+        return JsonResource::collection($todosQuery->get());
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param CreateTodoRequest $request
-     * @return JsonResponse
+     * @return JsonResource
      * @throws TodoTitleExists
      */
     public function store(CreateTodoRequest $request)
@@ -62,7 +61,7 @@ class TodoController extends Controller
         $todoCreateData = CreateTodoDTO::fromRequest($request);
         $todo = $this->createTodoAction->execute($todoCreateData);
 
-        return response()->json($todo);
+        return JsonResource::make($todo);
     }
 
     /**
@@ -70,13 +69,13 @@ class TodoController extends Controller
      *
      * @param UpdateTodoRequest $request
      * @param Todo $todo
-     * @return Todo
+     * @return JsonResource
      */
     public function update(UpdateTodoRequest $request, Todo $todo)
     {
         $todoUpdateData = UpdateTodoDTO::fromRequest($request);
 
-        return $this->updateTodoAction->execute($todo, $todoUpdateData);
+        return JsonResource::make($this->updateTodoAction->execute($todo, $todoUpdateData));
     }
 
     /**
