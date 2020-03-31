@@ -83,7 +83,7 @@ class TodoController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Todo $todo
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function destroy(Todo $todo)
     {

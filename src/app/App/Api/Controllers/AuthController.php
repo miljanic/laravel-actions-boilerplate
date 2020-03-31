@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Domain\Auth\Actions\LoginUserAction;
 use Domain\Auth\Actions\RegisterUserAction;
 use Domain\Auth\DataTransferObjects\UserCredentialsData;
+use Domain\Auth\Exceptions\UserExists;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -38,8 +40,8 @@ class AuthController extends Controller
     }
 
     /**
-     * @param UserLoginRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @return JsonResponse
      */
     public function login(Request $request)
     {
@@ -49,8 +51,9 @@ class AuthController extends Controller
     }
 
     /**
-     * @param UserCreateRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @return JsonResponse
+     * @throws UserExists
      */
     public function register(Request $request)
     {
@@ -60,21 +63,21 @@ class AuthController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @return void
      */
     public function me()
     {
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @return void
      */
     public function logout()
     {
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @return void
      */
     public function refresh()
     {

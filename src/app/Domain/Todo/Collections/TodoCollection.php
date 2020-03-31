@@ -1,11 +1,9 @@
 <?php
 
-
 namespace Domain\Todo\Collections;
 
-
 use Domain\Todo\Models\Todo;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 
 class TodoCollection extends Collection
 {

@@ -4,6 +4,7 @@
 namespace Domain\Todo\QueryBuilders;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 
 class TodoQueryBuilder extends Builder
 {

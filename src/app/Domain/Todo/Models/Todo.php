@@ -33,9 +33,13 @@ class Todo extends Model
     {
         return new TodoCollection($models);
     }
+//    ERROR: LessSpecificReturnStatement - app/Domain/Todo/Models/Todo.php:39:16 - The type 'Illuminate\Database\Eloquent\Builder'
+// is more general than the declared return type
+// 'Domain\Todo\QueryBuilders\TodoQueryBuilder' for Domain\Todo\Models\Todo::query
+//        return parent::query();
 
     public static function query() : TodoQueryBuilder
     {
-        return parent::query();
+        return static::query();
     }
 }
