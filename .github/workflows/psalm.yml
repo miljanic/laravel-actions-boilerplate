@@ -11,4 +11,5 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Psalm
+        working-directory: ./src
         uses: docker://vimeo/psalm-github-actions
