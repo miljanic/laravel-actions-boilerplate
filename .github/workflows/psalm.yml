@@ -14,6 +14,9 @@ jobs:
         run: |
           sh -c "cd ./src"
 
+      - name: Psalm
+        uses: docker://vimeo/psalm-github-actions
+
 #      - name: Install dependencies
 #        working-directory: ./src
 #        run: |
