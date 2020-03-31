@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Api\Controllers\AuthController;
+use App\Api\Controllers\TodoController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,18 +14,35 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['prefix' => 'auth', 'namespace' => '\App\Api\Auth'], function ($router) {
-    Route::post('register', 'AuthController@register');
-    Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::get('me', 'AuthController@me');
-});
+Route::group(['prefix' => 'auth', 'as' => 'auth::'], function () {
+    Route::post('register', [AuthController::class, 'register'])
+        ->name('register');
 
+    Route::post('login', [AuthController::class, 'login'])
+        ->name('login');
+
+    Route::post('logout', [AuthController::class, 'logout'])
+        ->name('logout');
+
+    Route::post('refresh', [AuthController::class, 'refresh'])
+        ->name('refresh');
+
+    Route::get('me', [AuthController::class, 'me'])
+        ->name('me');
+});
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::group(['namespace' => '\App\Api\Todo\Controllers'], function () {
-        Route::apiResource('todos', 'TodoController');
+    Route::group(['prefix' => 'todos', 'as' => 'todos::'], function () {
+        Route::get('/', [TodoController::class, 'index'])
+            ->name('index');
+
+        Route::post('/', [TodoController::class, 'store'])
+            ->name('store');
+
+        Route::put('/{todo}', [TodoController::class, 'update'])
+            ->name('update');
+
+        Route::delete('/{todo}', [TodoController::class, 'destroy'])
+            ->name('destroy');
     });
 });
-

@@ -14,6 +14,7 @@
         "laravel/telescope": "^2.1",
         "laravel/tinker": "^1.0",
         "spatie/data-transfer-object": "^1.11",
+        "spatie/laravel-query-builder": "^2.8",
         "tymon/jwt-auth": "1.0.0-rc.5"
     },
     "require-dev": {

@@ -5,7 +5,7 @@ namespace Domain\Todo\DataTransferObjects;
 use Illuminate\Http\Request;
 use Spatie\DataTransferObject\DataTransferObject;
 
-class TodoData extends DataTransferObject
+class CreateTodoDTO extends DataTransferObject
 {
 
     /**

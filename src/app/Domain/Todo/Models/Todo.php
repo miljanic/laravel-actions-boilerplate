@@ -2,6 +2,7 @@
 
 namespace Domain\Todo\Models;
 
+use App\User;
 use Domain\Todo\Collections\TodoCollection;
 use Domain\Todo\QueryBuilders\TodoQueryBuilder;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,11 @@ class Todo extends Model
     public string $title;
 
     public bool $is_done = false;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function newEloquentBuilder($query): TodoQueryBuilder
     {
