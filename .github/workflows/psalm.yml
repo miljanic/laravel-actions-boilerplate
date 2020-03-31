@@ -10,12 +10,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        working-directory: ./src
+      - name: CD
         run: |
-          sh -c "composer install --no-scripts --no-progress"
+          sh -c "cd ./src"
 
-      - name: Run psalm
-        working-directory: ./src
-        run: |
-          sh -c "/composer/vendor/bin/psalm  --output-format=github $*"
+#      - name: Install dependencies
+#        working-directory: ./src
+#        run: |
+#          sh -c "composer install --no-scripts --no-progress"
+#
+#      - name: Run psalm
+#        working-directory: ./src
+#        run: |
+#          sh -c "/composer/vendor/bin/psalm  --output-format=github $*"
