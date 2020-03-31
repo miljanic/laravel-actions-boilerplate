@@ -8,16 +8,21 @@
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
 >
     <issueHandlers>
-        <PropertyNotSetInConstructor errorLevel="suppress" />
+        <PropertyNotSetInConstructor errorLevel="suppress"/>
     </issueHandlers>
+
     <projectFiles>
-        <directory name="app/App" />
-        <directory name="app/Domain" />
+        <directory name="app/App"/>
+        <directory name="app/Domain"/>
         <ignoreFiles>
 
-            <file name="app/App/Providers/BroadcastServiceProvider.php" />
-            <file name="app/App/Console/Kernel.php" />
-            <directory name="vendor" />
+            <file name="app/App/Providers/BroadcastServiceProvider.php"/>
+            <file name="app/App/Console/Kernel.php"/>
+            <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>
+
+    <plugins>
+        <pluginClass class="Psalm\LaravelPlugin\Plugin"/>
+    </plugins>
 </psalm>
