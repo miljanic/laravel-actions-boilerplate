@@ -1,5 +1,9 @@
 # Laravel Boilerplate - Laravel 7.x API
 
+## Ego boosters
+![](https://shepherd.dev/github/miljanic/laravel-actions-boilerplate/coverage.svg "Logo Title Text 1")
+
+
 ## List of features/packages:
 - Psalm for static analysis
 - JWT Auth
