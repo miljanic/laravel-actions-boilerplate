@@ -10,19 +10,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: CD
+      - name: Install dependencies
+        working-directory: ./src
         run: |
-          sh -c "cd ./src"
+          sh -c "composer install --no-scripts --no-progress"
 
-      - name: Psalm
-        uses: docker://vimeo/psalm-github-actions
-
-#      - name: Install dependencies
-#        working-directory: ./src
-#        run: |
-#          sh -c "composer install --no-scripts --no-progress"
-#
-#      - name: Run psalm
-#        working-directory: ./src
-#        run: |
-#          sh -c "/composer/vendor/bin/psalm  --output-format=github $*"
+      - name: Run psalm
+        working-directory: ./src
+        run: |
+          sh -c "./vendor/bin/psalm  --output-format=github $*"
