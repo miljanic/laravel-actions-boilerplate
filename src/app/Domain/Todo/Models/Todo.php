@@ -6,6 +6,7 @@ use App\User;
 use Domain\Todo\Collections\TodoCollection;
 use Domain\Todo\QueryBuilders\TodoQueryBuilder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Todo extends Model
 {
@@ -19,7 +20,7 @@ class Todo extends Model
 
     public bool $is_done = false;
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
